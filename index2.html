@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextDoc - Création de documents professionnels sur mesure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #007BFF 0%, #00BFFF 100%);
+        }
+        
+        .document-slide {
+            transition: all 0.5s ease;
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
+        }
+        
+        .document-slide:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 123, 255, 0.3);
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .portfolio-item {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .portfolio-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .portfolio-overlay {
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .price-card {
+            transition: all 0.3s ease;
+        }
+        
+        .price-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .tool-logo {
+            animation: scroll 20s linear infinite;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .timeline-step {
+            position: relative;
+        }
+        
+        .timeline-step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -50px;
+            width: 40px;
+            height: 2px;
+            background: #007BFF;
+        }
+        
+        .input-field {
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+        }
+        
+        .before-after {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .before-after img {
+            transition: all 0.5s ease;
+        }
+        
+        .before-after:hover img {
+            transform: scale(1.05);
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .floating { animation: float 6s ease-in-out infinite; }
+        .slide-in { animation: slideIn 1s ease-out forwards; }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .bg-custom-blue { background-color: #007BFF; }
+        .text-custom-blue { color: #007BFF; }
+        .border-custom-blue { border-color: #007BFF; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+   <!-- NAVBAR -->
+<nav class="fixed w-full bg-white shadow-md z-50">
+    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <!-- LOGO -->
+        <div class="flex items-center">
+            <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center text-white relative mr-2">
+                <i class="fas fa-file-alt text-xl"></i>
+                <i class="fas fa-check text-xs absolute bottom-1 right-1"></i>
+            </div>
+            <span class="text-xl font-bold text-blue-600">NextDoc</span>
+        </div>
+
+        <!-- MENU NAVIGATION DESKTOP -->
+        <div class="hidden md:flex space-x-8">
+            <a href="#accueil" class="text-blue-600 font-medium hover:text-blue-800 transition">Accueil</a>
+            <a href="#services" class="text-gray-600 hover:text-blue-600 transition">Services</a>
+            <a href="#portfolio" class="text-gray-600 hover:text-blue-600 transition">Portfolio</a>
+            <a href="#processus" class="text-gray-600 hover:text-blue-600 transition">Processus</a>
+            <a href="#tarifs" class="text-gray-600 hover:text-blue-600 transition">Tarifs</a>
+            <a href="#contact" class="text-gray-600 hover:text-blue-600 transition">Contact</a>
+        </div>
+
+        <!-- BOUTON BURGER MOBILE -->
+        <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- MENU MOBILE (caché par défaut) -->
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+        <a href="#accueil" class="block py-2 text-blue-600 font-medium hover:text-blue-800 transition">Accueil</a>
+        <a href="#services" class="block py-2 text-gray-600 hover:text-blue-600 transition">Services</a>
+        <a href="#portfolio" class="block py-2 text-gray-600 hover:text-blue-600 transition">Portfolio</a>
+        <a href="#processus" class="block py-2 text-gray-600 hover:text-blue-600 transition">Processus</a>
+        <a href="#tarifs" class="block py-2 text-gray-600 hover:text-blue-600 transition">Tarifs</a>
+        <a href="#contact" class="block py-2 text-gray-600 hover:text-blue-600 transition">Contact</a>
+    </div>
+</nav>
+
+<!-- JS pour toggle menu -->
+<script>
+    const btn = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+
+    btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+    });
+</script>
+
+
+
+    <!-- Hero Section --> 
+    <section id="accueil" class="pt-32 pb-20 px-6 bg-gradient-to-r from-blue-50 to-white">
+        <div class="container mx-auto flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Vos documents pros. <br><span class="text-blue-600">Plus beaux. Plus rapides.</span></h1>
+                <p class="text-xl text-gray-600 mb-8">CV, rapports, présentations, lettres pro… sur mesure et stylés.</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="https://wa.me/237621377523" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105">Demander un document</a>
+                    <a href="#tarifs" class="border-2 border-blue-600 text-blue-600 font-medium py-3 px-6 rounded-lg shadow-sm transition duration-300 transform hover:scale-105">Voir les tarifs</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 relative">
+                <div class="relative">
+                    <div class="absolute -top-6 -left-6 w-64 h-64 bg-blue-100 rounded-2xl opacity-50"></div>
+                    <div class="absolute -bottom-6 -right-6 w-64 h-64 bg-blue-100 rounded-2xl opacity-50"></div>
+                    <div class="relative z-10">
+                        <div class="document-slide bg-white p-4 rounded-xl shadow-xl">
+                            <div class="flex justify-between items-center mb-4">
+                                <div class="flex space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <div class="text-sm text-gray-500">CV Professionnel</div>
+                            </div>
+                            <div class="bg-gray-100 rounded-lg p-4">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center text-white text-2xl font-bold mr-4">JA</div>
+                                    <div>
+                                        <h3 class="text-xl font-bold">Jean Atangana</h3>
+                                        <p class="text-blue-600">Développeur Full Stack</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <p class="text-sm text-gray-500">Expérience</p>
+                                        <p class="font-medium">5+ ans</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Disponibilité</p>
+                                        <p class="font-medium">Immédiate</p>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <p class="text-sm text-gray-500">Compétences</p>
+                                    <div class="flex flex-wrap gap-2 mt-2">
+                                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">JavaScript</span>
+                                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">React</span>
+                                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Node.js</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ <!-- Technologies Section -->
+    <section class="py-12 bg-gray-50">
+  <div class="container mx-auto px-6">
+    <h3 class="text-2xl font-bold text-center mb-8">Outils que nous utilisons</h3>
+    
+    <div class="relative overflow-hidden">
+      <div class="flex items-center justify-center space-x-10 py-4 flex-wrap">
+        <!-- Canva -->
+        <div class="flex-shrink-0">
+          <img src="https://static.canva.com/static/images/favicon.ico" alt="Canva" class="h-10 opacity-70 hover:opacity-100 transition">
+        </div>
+        <!-- ChatGPT -->
+        <div class="flex-shrink-0">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT" class="h-10 opacity-70 hover:opacity-100 transition">
+        </div>
+        <!-- Notion -->
+        <div class="flex-shrink-0">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion" class="h-10 opacity-70 hover:opacity-100 transition">
+        </div>
+        <!-- Figma -->
+        <div class="flex-shrink-0">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" class="h-10 opacity-70 hover:opacity-100 transition">
+        </div>
+        <!-- Google Docs -->
+        <div class="flex-shrink-0">
+          <img src="https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_5.ico" alt="Google Docs" class="h-10 opacity-70 hover:opacity-100 transition">
+        </div>
+        <!-- PowerPoint -->
+        <div class="flex-shrink-0">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Microsoft_Office_PowerPoint_%282019%E2%80%93present%29.svg" alt="PowerPoint" class="h-10 opacity-70 hover:opacity-100 transition">
+        </div>
+        <!-- Word -->
+        <div class="flex-shrink-0">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Microsoft_Office_Word_%282019%E2%80%93present%29.svg" alt="Word" class="h-10 opacity-70 hover:opacity-100 transition">
+        </div>
+       
+        <!-- ZeroGPT -->
+        <div class="flex-shrink-0">
+          <img src="https://www.zerogpt.com/favicon.ico" alt="ZeroGPT" class="h-10 opacity-70 hover:opacity-100 transition">
+        </div>
+         <div class="flex-shrink-0">
+          <img src="https://static.deepl.com/img/logo/deepl-logo-blue.svg" alt="DeepL" class="h-10 opacity-70 hover:opacity-100 transition duration-300">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 px-6 bg-white">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nos Services</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Des documents professionnels qui vous démarquent et impressionnent</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">CV Professionnels</h3>
+                    <p class="text-gray-600 mb-4">Classiques, design ou modernes, nous créons des CV qui captent l'attention des recruteurs.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Classique</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Moderne</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Design</span>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Rapports & Mémoires</h3>
+                    <p class="text-gray-600 mb-4">Mise en page professionnelle de vos rapports de stage, mémoires et travaux universitaires.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Mise en page</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Relecture</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Formatage</span>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Présentations PowerPoint</h3>
+                    <p class="text-gray-600 mb-4">Des diaporamas percutants pour vos soutenances, présentations professionnelles ou pitchs.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Soutenance</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Pitch Deck</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Infographies</span>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Lettres de Motivation</h3>
+                    <p class="text-gray-600 mb-4">Des lettres personnalisées qui mettent en valeur votre profil et vos compétences.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Personnalisé</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Optimisé ATS</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Professionnel</span>
+                    </div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Emails Professionnels</h3>
+                    <p class="text-gray-600 mb-4">Rédaction et mise en forme d'emails professionnels pour une communication efficace.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Formel</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Clair</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Impactant</span>
+                    </div>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Business Plans</h3>
+                    <p class="text-gray-600 mb-4">Des business plans complets et professionnels pour convaincre investisseurs et partenaires.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Étude de marché</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Projections</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Stratégie</span>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-16 px-6 bg-gray-50">
+        <div class="container mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Nos Spécialités</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Des solutions adaptées à chaque besoin professionnel</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Category 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div class="w-14 h-14 gradient-bg rounded-lg flex items-center justify-center text-white text-xl mb-4">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Professionnel</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-sm"></i> Profil LinkedIn</li>
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-sm"></i> Lettres professionnelles</li>
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-sm"></i> Emails pro</li>
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-sm"></i> Rapports d'activité</li>
+                    </ul>
+                </div>
+                
+                <!-- Category 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div class="w-14 h-14 gradient-bg rounded-lg flex items-center justify-center text-white text-xl mb-4">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Étudiant</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-sm"></i> Mise en page mémoire</li>
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-sm"></i> Relecture et correction</li>
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-sm"></i> Présentations de soutenance</li>
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-sm"></i> CV étudiant</li>
+                    </ul>
+                </div>
+                
+                <!-- Category 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div class="w-14 h-14 gradient-bg rounded-lg flex items-center justify-center text-white text-xl mb-4">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Corporate</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-sm"></i> Pitch deck</li>
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-sm"></i> Infographies</li>
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-sm"></i> Rapports annuels</li>
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-sm"></i> Présentations clients</li>
+                    </ul>
+                </div>
+                
+                <!-- Category 4 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div class="w-14 h-14 gradient-bg rounded-lg flex items-center justify-center text-white text-xl mb-4">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Oratoire</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-sm"></i> Scripts de soutenance</li>
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-sm"></i> Introductions orales</li>
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-sm"></i> Discours professionnels</li>
+                        <li class="flex items-center"><i class="fas fa-check text-blue-500 mr-2 text-sm"></i> Présentations orales</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 px-6 bg-white">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nos Réalisations</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Des exemples concrets de documents que nous avons créés</p>
+            </div>
+            
+            <!-- Portfolio Filter -->
+            <div class="flex justify-center mb-12">
+                <div class="inline-flex flex-wrap justify-center gap-2">
+                    <button class="px-4 py-2 bg-blue-600 text-white rounded-full font-medium">Tous</button>
+                    <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-full font-medium transition">CV</button>
+                    <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-full font-medium transition">Présentations</button>
+                    <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-full font-medium transition">Rapports</button>
+                    <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-full font-medium transition">Lettres</button>
+                    <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-full font-medium transition">Business Plans</button>
+                </div>
+            </div>
+            
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Portfolio Item 1 -->
+                <div class="portfolio-item relative rounded-xl overflow-hidden shadow-lg">
+                    <div class="before-after">
+                        <img src="images/travailleur-des-ressources-humaines-en-demarrage-identifiant-les-bons-candidats-pour-l-ouverture-d-emplois-examinant-le-cv.jpg" alt="CV Avant/Après" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="portfolio-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+                        <div class="flex gap-2 mb-2">
+                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded">CV</span>
+                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded">Design Moderne</span>
+                        </div>
+                        <h3 class="text-white font-bold text-xl mb-2">CV Professionnel</h3>
+                        <p class="text-gray-200 text-sm">Transformation complète d'un CV basique en un design moderne et impactant</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 2 -->
+                <div class="portfolio-item relative rounded-xl overflow-hidden shadow-lg">
+                    <div class="before-after">
+                        <img src="images/pexels-pavel-danilyuk-8761560.webp" alt="Présentation PowerPoint" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="portfolio-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+                        <div class="flex gap-2 mb-2">
+                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded">Présentation</span>
+                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded">Soutenance</span>
+                        </div>
+                        <h3 class="text-white font-bold text-xl mb-2">Présentation de Soutenance</h3>
+                        <p class="text-gray-200 text-sm">Diaporama professionnel pour une soutenance de mémoire universitaire</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 3 -->
+                <div class="portfolio-item relative rounded-xl overflow-hidden shadow-lg">
+                    <div class="before-after">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Rapport Professionnel" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="portfolio-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+                        <div class="flex gap-2 mb-2">
+                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded">Rapport</span>
+                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded">Mise en page</span>
+                        </div>
+                        <h3 class="text-white font-bold text-xl mb-2">Rapport Annuel</h3>
+                        <p class="text-gray-200 text-sm">Mise en page professionnelle d'un rapport d'activité annuel</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 4 -->
+                <div class="portfolio-item relative rounded-xl overflow-hidden shadow-lg">
+                    <div class="before-after">
+                        <img src="images/scene-de-bureau-avec-ordinateur-portable.jpg" alt="Business Plan" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="portfolio-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+                        <div class="flex gap-2 mb-2">
+                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded">Business Plan</span>
+                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded">Startup</span>
+                        </div>
+                        <h3 class="text-white font-bold text-xl mb-2">Business Plan Startup</h3>
+                        <p class="text-gray-200 text-sm">Création d'un business plan complet pour une startup technologique</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 5 -->
+                <div class="portfolio-item relative rounded-xl overflow-hidden shadow-lg">
+                    <div class="before-after">
+                        <img src="images/smiley-coup-moyen-femme-tenant-contrat.jpg" alt="Lettre de Motivation" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="portfolio-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+                        <div class="flex gap-2 mb-2">
+                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded">Lettre</span>
+                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded">Personnalisée</span>
+                        </div>
+                        <h3 class="text-white font-bold text-xl mb-2">Lettre de Motivation</h3>
+                        <p class="text-gray-200 text-sm">Lettre de motivation personnalisée pour un poste de directeur marketing</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 6 -->
+                <div class="portfolio-item relative rounded-xl overflow-hidden shadow-lg">
+                    <div class="before-after">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Infographie" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="portfolio-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+                        <div class="flex gap-2 mb-2">
+                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded">Infographie</span>
+                            <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded">Données</span>
+                        </div>
+                        <h3 class="text-white font-bold text-xl mb-2">Infographie Statistique</h3>
+                        <p class="text-gray-200 text-sm">Visualisation de données complexes sous forme d'infographie percutante</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonials -->
+            <div class="mt-20">
+                <h3 class="text-2xl font-bold text-center mb-12">Ce que disent nos clients</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold mr-4">JO</div>
+                            <div>
+                                <h4 class="font-bold">Jean Onana</h4>
+                                <div class="flex text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic">"Mon CV a été retravaillé de manière exceptionnelle. J'ai reçu 3 fois plus d'entretiens qu'avant. Un service rapide et professionnel!"</p>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold mr-4">PL</div>
+                            <div>
+                                <h4 class="font-bold">Paul Likeng</h4>
+                                <div class="flex text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic">"La présentation PowerPoint pour ma soutenance était parfaite. Le jury a particulièrement apprécié la clarté et le design professionnel."</p>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold mr-4">AS</div>
+                            <div>
+                                <h4 class="font-bold">Adama Shine</h4>
+                                <div class="flex text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic">"J'ai commandé une lettre de motivation personnalisée et j'ai décroché l'entretien pour le poste que je convoitais. Merci NextDoc!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- Work Process Section -->
+    <section id="processus" class="py-20 px-6 bg-white">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Notre Processus</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Comment nous travaillons pour vous fournir des documents exceptionnels</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center mb-20">
+                <!-- Step 1 -->
+                <div class="timeline-step flex flex-col items-center text-center mb-10 md:mb-0 w-full md:w-1/5">
+                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center text-white text-2xl mb-4">1</div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Commande</h3>
+                    <p class="text-gray-600">Vous passez commande via notre formulaire en précisant vos besoins</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="timeline-step flex flex-col items-center text-center mb-10 md:mb-0 w-full md:w-1/5">
+                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center text-white text-2xl mb-4">2</div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Échange & Brief</h3>
+                    <p class="text-gray-600">Nous échangeons pour comprendre parfaitement vos attentes</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="timeline-step flex flex-col items-center text-center mb-10 md:mb-0 w-full md:w-1/5">
+                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center text-white text-2xl mb-4">3</div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Création</h3>
+                    <p class="text-gray-600">Nos experts créent votre document avec soin et professionnalisme</p>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="timeline-step flex flex-col items-center text-center mb-10 md:mb-0 w-full md:w-1/5">
+                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center text-white text-2xl mb-4">4</div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Livraison</h3>
+                    <p class="text-gray-600">Vous recevez une première version pour validation</p>
+                </div>
+                
+                <!-- Step 5 -->
+                <div class="timeline-step flex flex-col items-center text-center w-full md:w-1/5">
+                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center text-white text-2xl mb-4">5</div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Finalisation</h3>
+                    <p class="text-gray-600">Retouches finales et envoi du document final</p>
+                </div>
+            </div>
+            
+            <div class="bg-blue-50 rounded-xl p-8 md:p-12">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Pourquoi choisir NextDoc?</h3>
+                        <ul class="space-y-4 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                                <span>Documents 100% personnalisés et uniques</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                                <span>Design professionnel et moderne</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                                <span>Respect des délais impartis</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                                <span>Optimisation pour l'IA des recrutements (ATS)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                                <span>Support réactif et professionnel</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2 md:pl-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="text-lg font-bold text-gray-800 mb-4">Temps de livraison moyen</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-600">CV</span>
+                                        <span class="text-sm font-medium text-gray-600">24-48h</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-600 h-2 rounded-full" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-600">Lettres</span>
+                                        <span class="text-sm font-medium text-gray-600">24h</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-600 h-2 rounded-full" style="width: 95%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-600">Présentations</span>
+                                        <span class="text-sm font-medium text-gray-600">2-3 jours</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-600 h-2 rounded-full" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-600">Rapports</span>
+                                        <span class="text-sm font-medium text-gray-600">3-5 jours</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-600 h-2 rounded-full" style="width: 70%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="tarifs" class="py-20 px-6 bg-gray-50">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nos Tarifs</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Des solutions adaptées à tous les budgets</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Price Card 1 -->
+                <div class="price-card bg-white p-8 rounded-xl shadow-md border border-gray-100 transform hover:-translate-y-2 transition duration-300">
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Étudiant</h3>
+                        <p class="text-gray-600">Parfait pour les étudiants</p>
+                    </div>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-blue-600">Sur devis</span>
+                        <span class="text-gray-600">/document</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>CV basique</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Mise en page rapport</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Lettre de motivation simple</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-times text-red-400 mr-2"></i>
+                            <span>Design avancé</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-times text-red-400 mr-2"></i>
+                            <span>Optimisation ATS</span>
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/237621377523" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg text-center transition">Demander un devis</a>
+                </div>
+                
+                <!-- Price Card 2 (Featured) -->
+                <div class="price-card bg-white p-8 rounded-xl shadow-lg border-2 border-blue-500 transform hover:-translate-y-2 transition duration-300 relative">
+                    <div class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">POPULAIRE</div>
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Professionnel</h3>
+                        <p class="text-gray-600">Pour les actifs et chercheurs d'emploi</p>
+                    </div>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-blue-600">Sur devis</span>
+                        <span class="text-gray-600">/document</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>CV design moderne</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Lettre personnalisée</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Optimisation ATS</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span> retouches incluses</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-times text-red-400 mr-2"></i>
+                            <span>Support prioritaire</span>
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/237621377523" class="block w-full gradient-bg hover:opacity-90 text-white font-medium py-3 px-6 rounded-lg text-center transition">Demander un devis</a>
+                </div>
+                
+                <!-- Price Card 3 -->
+                <div class="price-card bg-white p-8 rounded-xl shadow-md border border-gray-100 transform hover:-translate-y-2 transition duration-300">
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Premium</h3>
+                        <p class="text-gray-600">Solution sur mesure</p>
+                    </div>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-blue-600">Sur devis</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Pack complet CV + lettre</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Présentations complexes</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Business plans</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Support prioritaire</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Design exclusif</span>
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/237621377523" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg text-center transition">Demander un devis</a>
+                </div>
+            </div>
+            
+            <div class="mt-16 bg-white rounded-xl shadow-md p-8 max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold text-center mb-6">Questions fréquentes</h3>
+                
+                <div class="space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="border-b border-gray-200 pb-4">
+                        <button class="flex justify-between items-center w-full text-left font-medium text-gray-800">
+                            <span>Quels sont les délais de livraison?</span>
+                            <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300"></i>
+                        </button>
+                        <div class="mt-2 text-gray-600">
+                            <p>Les délais varient selon le type de document : CV (24-48h), lettres (24h), présentations (2-3 jours), rapports (3-5 jours). Nous pouvons aussi traiter les demandes urgentes avec un supplément.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 2 -->
+                    <div class="border-b border-gray-200 pb-4">
+                        <button class="flex justify-between items-center w-full text-left font-medium text-gray-800">
+                            <span>Comment se passe le paiement?</span>
+                            <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300"></i>
+                        </button>
+                        <div class="mt-2 text-gray-600">
+                            <p>Nous acceptons les paiements par Mobile Money (Orange Money, MTN Mobile Money), virement bancaire et PayPal. Le paiement se fait à la commande pour les forfaits standard, et 50% à la commande + 50% à la livraison pour les prestations sur mesure.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 3 -->
+                    <div class="border-b border-gray-200 pb-4">
+                        <button class="flex justify-between items-center w-full text-left font-medium text-gray-800">
+                            <span>Puis-je demander des modifications?</span>
+                            <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300"></i>
+                        </button>
+                        <div class="mt-2 text-gray-600">
+                            <p>Oui! Le forfait Professionnel inclut 1 retouche gratuite. Pour les autres forfaits, les modifications mineures sont gratuites, les modifications majeures peuvent être facturées selon leur complexité. Toutes les demandes de modification doivent être faites dans les 7 jours suivant la livraison.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 4 -->
+                    <div class="border-b border-gray-200 pb-4">
+                        <button class="flex justify-between items-center w-full text-left font-medium text-gray-800">
+                            <span>Mes informations sont-elles sécurisées?</span>
+                            <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300"></i>
+                        </button>
+                        <div class="mt-2 text-gray-600">
+                            <p>Absolument. Nous traitons toutes les informations avec la plus grande confidentialité. Les documents sont stockés de manière sécurisée et supprimés après 30 jours. Nous ne partageons jamais vos informations avec des tiers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- About Section -->
+     <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-10 md:mb-0 flex justify-center">
+                    <div class="relative">
+                        <img src="1730708693368.jpeg" alt="Marvin" class="w-64 h-64 rounded-full border-4 border-custom-blue">
+                        <div class="absolute -bottom-3 -right-3 bg-custom-blue text-white p-3 rounded-full">
+                            <i class="fas fa-pen-fancy text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-2/3 md:pl-12">
+                    <h2 class="text-3xl font-bold mb-6">À propos de NextDoc</h2>
+                    <p class="text-gray-600 mb-6 text-lg">"Je suis Marvin, passionné de design et d'intelligence artificielle. Après avoir aidé des dizaines d'amis  à améliorer leurs documents professionnels, j'ai décidé de créer NextDoc pour aider étudiants et professionnels à briller avec des documents impactants."</p>
+                    
+                    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-custom-blue">
+                        <h3 class="text-xl font-semibold mb-3 text-custom-blue">Notre vision</h3>
+                        <p class="text-gray-700">"Rendre les documents professionnels accessibles à tous, sans compromis sur le style et la qualité. Chaque document que nous créons est une opportunité pour son propriétaire de se démarquer et d'atteindre ses objectifs."</p>
+                    </div>
+                    
+                    <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-custom-blue mb-2">50+</div>
+                            <div class="text-gray-600">Clients satisfaits</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-custom-blue mb-2">100+</div>
+                            <div class="text-gray-600">Documents créés</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-custom-blue mb-2">24h</div>
+                            <div class="text-gray-600">Délai moyen</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-custom-blue mb-2">4.9/5</div>
+                            <div class="text-gray-600">Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4">Contactez-nous</h2>
+            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-16">Nous sommes disponibles pour répondre à toutes vos questions</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div>
+                    <h3 class="text-xl font-semibold mb-6">Nos canaux de communication</h3>
+                    
+                    <div class="space-y-6">
+                        <a href="https://wa.me/237621377523" class="flex items-center bg-green-100 p-4 rounded-lg hover:bg-green-200 transition duration-300">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white text-xl mr-4">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium">WhatsApp</div>
+                                <div class="text-gray-600 text-sm">Réponse rapide (24/7)</div>
+                            </div>
+                            <i class="fas fa-arrow-right ml-auto text-gray-400"></i>
+                        </a>
+                        
+
+                        
+                        <a href="mailto:contact@nextdoc.com" class="flex items-center bg-blue-100 p-4 rounded-lg hover:bg-blue-200 transition duration-300">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white text-xl mr-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium">Email</div>
+                                <div class="text-gray-600 text-sm">marvinjoel237@gmail.com</div>
+                            </div>
+                            <i class="fas fa-arrow-right ml-auto text-gray-400"></i>
+                        </a>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-6">Envoyez-nous un message</h3>
+                    <form class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="mb-4">
+                            <label for="contact-name" class="block text-gray-700 mb-2">Votre nom*</label>
+                            <input type="text" id="contact-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-blue" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="contact-email" class="block text-gray-700 mb-2">Votre email*</label>
+                            <input type="email" id="contact-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-blue" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="contact-subject" class="block text-gray-700 mb-2">Sujet*</label>
+                            <input type="text" id="contact-subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-blue" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="contact-message" class="block text-gray-700 mb-2">Message*</label>
+                            <textarea id="contact-message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-blue" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-custom-blue text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition duration-300">Envoyer le message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>  
+     <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-file-alt text-white text-xl"></i>
+                            <i class="fas fa-check absolute text-white text-xs mt-3 ml-3"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">NextDoc</h3>
+                    </div>
+                    <p class="text-gray-400">Vos documents professionnels, plus beaux et plus rapides.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Liens utiles</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Accueil</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-white transition">Portfolio</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white transition">Tarifs</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Légal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Mentions légales</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Conditions générales</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Politique de confidentialité</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Abonnez-vous pour recevoir nos offres spéciales.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Votre email" class="px-4 py-2 rounded-l-lg focus:outline-none text-black w-full">
+                        <button type="submit" class="bg-custom-blue px-4 py-2 rounded-r-lg hover:bg-blue-600 transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-500 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-400 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-pink-500 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-green-500 transition">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 NextDoc. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+                                   
+</body>
+</html>
